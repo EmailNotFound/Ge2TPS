@@ -12,21 +12,27 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         // Optionally, hide the cursor when the game starts
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        //float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        //float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Prevents the camera from over-rotating
+        //xRotation -= mouseY;
+        //xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Prevents the camera from over-rotating
 
         // Apply the rotation to the camera (for looking up and down)
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         // Apply the rotation to the player body (for turning left and right)
-        playerBody.Rotate(Vector3.up * mouseX);
+        //playerBody.Rotate(Vector3.up * mouseX);
+
+        //float x, y;
+        //x = Input.GetAxis("Mouse X") * Time.deltaTime * 50;
+        //y = Input.GetAxis("Mouse Y") * Time.deltaTime * 50;
+        //transform.Rotate(0, x, 0);
     }
+
 }

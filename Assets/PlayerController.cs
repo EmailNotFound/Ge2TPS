@@ -8,6 +8,8 @@ public class MainCamera : MonoBehaviour
     public float speed = 15;
     public Animator animator;
     public AudioClip clip;
+    public GameObject bullet;
+    public Transform pos;
 
     void Start()
     {
@@ -31,6 +33,16 @@ public class MainCamera : MonoBehaviour
         {
             animator.Play("demo_combat_shoot");
             this.GetComponent<AudioSource>().PlayOneShot(clip);
+        }
+
+        float x, y;
+        x = Input.GetAxis("Mouse X") * Time.deltaTime * 50;
+        y = Input.GetAxis("Mouse Y") * Time.deltaTime * 50;
+        transform.Rotate(0, x, 0);
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Instantiate(bullet, pos.transform.position, pos.transform.rotation);
         }
     }
 
