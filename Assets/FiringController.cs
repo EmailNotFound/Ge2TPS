@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class FiringController : MonoBehaviour
 {
-    private Rigidbody rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        Destroy(this.gameObject, 4f);
     }
 
     // Update is called once per frame
@@ -19,7 +18,11 @@ public class FiringController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "obstacle")
+        if (other.tag == "Obstacle")
+        {
+            Destroy(this.gameObject);
+        }
+        else if (other.tag == "Enemy")
         {
             Destroy(this.gameObject);
         }

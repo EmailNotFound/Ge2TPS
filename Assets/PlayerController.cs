@@ -36,8 +36,8 @@ public class MainCamera : MonoBehaviour
         }
 
         float x, y;
-        x = Input.GetAxis("Mouse X") * Time.deltaTime * 50;
-        y = Input.GetAxis("Mouse Y") * Time.deltaTime * 50;
+        x = Input.GetAxis("Mouse X") * Time.deltaTime * 200;
+        y = Input.GetAxis("Mouse Y") * Time.deltaTime * 200;
         transform.Rotate(0, x, 0);
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -56,7 +56,7 @@ public class MainCamera : MonoBehaviour
     void PlayerMoveEvent(float x, float y)
     {
         Vector3 vector = new Vector3(x, 0, -y);
-        vector = transform.position + this.transform.forward * Time.deltaTime * x * 20 + transform.right * Time.deltaTime * y * 20;
+        vector = transform.position + this.transform.forward * Time.deltaTime * x * 7 + transform.right * Time.deltaTime * y * 7;
         rb.MovePosition(vector);
     }
 }
