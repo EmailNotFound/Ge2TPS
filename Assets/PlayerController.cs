@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCamera : MonoBehaviour
+public class Playercontroller : MonoBehaviour
 {
     private Rigidbody rb;
-    public float speed = 15;
-    public Animator animator;
+    static public float speed = 15;
     public AudioClip clip;
     public GameObject bullet;
     public Transform pos;
+    public float PlayerHp = 10;
+    public float maxplayerHP = 10;
+    public Animator animator;
+    bool isProtected;
 
     void Start()
     {
@@ -33,6 +36,10 @@ public class MainCamera : MonoBehaviour
         {
             animator.Play("demo_combat_shoot");
             this.GetComponent<AudioSource>().PlayOneShot(clip);
+            if (speed >= 2)
+            {
+                speed -= 0.15f;
+            }
         }
 
         float x, y;
@@ -56,7 +63,19 @@ public class MainCamera : MonoBehaviour
     void PlayerMoveEvent(float x, float y)
     {
         Vector3 vector = new Vector3(x, 0, -y);
-        vector = transform.position + this.transform.forward * Time.deltaTime * x * 7 + transform.right * Time.deltaTime * y * 7;
+        vector = transform.position + this.transform.forward * Time.deltaTime * x * speed + transform.right * Time.deltaTime * y * speed;
         rb.MovePosition(vector);
+    }
+
+    public void Ondamage(int damage)
+    {
+        PlayerHp -= damage;
+    }
+
+    IEnumerator ProtectCoroutine()
+    {
+        isProtected = true;
+        yield return new WaitForSeconds(0.5f);
+        isProtected = false;
     }
 }

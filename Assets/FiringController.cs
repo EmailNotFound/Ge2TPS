@@ -7,7 +7,7 @@ public class FiringController : MonoBehaviour
 
     void Start()
     {
-        Destroy(this.gameObject, 4f);
+        Destroy(this.gameObject, 2f);
     }
 
     // Update is called once per frame
