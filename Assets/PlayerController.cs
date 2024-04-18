@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Playercontroller : MonoBehaviour
 {
     private Rigidbody rb;
-    static public float speed = 15;
+    public float speed = 15;
     public AudioClip clip;
     public GameObject bullet;
     public Transform pos;
@@ -13,6 +14,7 @@ public class Playercontroller : MonoBehaviour
     public float maxplayerHP = 10;
     public Animator animator;
     bool isProtected;
+    public int SceneIndex;
 
     void Start()
     {
@@ -38,7 +40,7 @@ public class Playercontroller : MonoBehaviour
             this.GetComponent<AudioSource>().PlayOneShot(clip);
             if (speed >= 2)
             {
-                speed -= 0.15f;
+                speed -= 0.2f;
             }
         }
 
@@ -50,6 +52,11 @@ public class Playercontroller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Instantiate(bullet, pos.transform.position, pos.transform.rotation);
+        }
+
+        if (PlayerHp <= 0.01f)
+        {
+            SceneManager.LoadScene(SceneIndex);
         }
     }
 
@@ -67,15 +74,4 @@ public class Playercontroller : MonoBehaviour
         rb.MovePosition(vector);
     }
 
-    public void Ondamage(int damage)
-    {
-        PlayerHp -= damage;
-    }
-
-    IEnumerator ProtectCoroutine()
-    {
-        isProtected = true;
-        yield return new WaitForSeconds(0.5f);
-        isProtected = false;
-    }
 }
